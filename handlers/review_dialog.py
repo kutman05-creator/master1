@@ -9,24 +9,16 @@ class RestaurantReview(StatesGroup):
     phone_number = State()
     rate = State()
     extra_comments = State()
-    age = State()
 
 @review_router. callback_query(F.data == "review")
 async def  process_name(call: types.CallbackQuery,state: FSMContext) :
     await call.message.answer ("Как Baс зовут?")
-    await state.set_state (RestaurantReview.age )
+    await state.set_state (RestaurantReview.name )
 
-
-@review_router.callback_query(RestaurantReview.age )
-async def process_name(message: types.Message, state: FSMContext):
-    await message.answer("Как Baс зовут?")
-    await state.set_state(RestaurantReview.name)
 
 
 @review_router.message(RestaurantReview.name)
 async def process_phone_number(message: types.Message, state: FSMContext):
-    name =  message.text
-    await  state.update_data(age = name)
     await message. answer ("Ваш номер телефона")
     await state.set_state(RestaurantReview.phone_number)
 

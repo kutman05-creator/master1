@@ -8,7 +8,7 @@ from  handlers.myinfo import  myinfo_router
 from  handlers.random import  random_router
 from  handlers.picture import  picture_router
 from  handlers.review_dialog import review_router
-
+from  handlers.other_router import other_router
 
 async def main():
     dp.include_router(start_router)
@@ -16,6 +16,7 @@ async def main():
     dp.include_router(random_router)
     dp.include_router(picture_router)
     dp.include_router(review_router)
+    dp.include_router(other_router)
     await  dp.start_polling(bot)
 
 
