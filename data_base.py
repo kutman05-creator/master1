@@ -1,6 +1,6 @@
 import sqlite3
 
-from handlers.review_dialog import extra_process
+
 
 
 class Database:
@@ -11,7 +11,7 @@ class Database:
         with sqlite3.connect(self.path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-            CREATE TABLE IF NOT EXISTS REVIEWS(
+            CREATE TABLE  IF NOT EXISTS REVIEWS(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             data INTEGER,
@@ -19,6 +19,17 @@ class Database:
             extra_comments TEXT
             )
             """)
+
+
+            cursor.execute("""
+             CREATE TABLE IF NOT EXISTS DISHES(
+             id INTEGER PRIMARY KEY AUTOINCREMENT,
+             name TEXT,
+             price INTEGER,
+             category TEXT,
+             portion_option TEXT
+             )
+             """)
 
     def save_review(self,data:dict):
         with sqlite3.connect(self.path) as conn:
@@ -29,5 +40,17 @@ class Database:
                 (name,data,phone_number,extra_comments)
                 VALUES (?,?,?,?)
                 """,
-                (data["name"],data["data"],data["phone_number"],data["extra_comments"])
+                (data["name"],data["date"],data["phone_number"],data["extra_comments"])
             )
+
+    def save_dish(self, data: dict):
+            with sqlite3.connect(self.path) as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                """
+                    INSERT INTO dishes (name, price, category, portion_option)
+                    VALUES (?, ?, ?, ?)
+                """,
+                    (data["name"], data["price"], data["category"], data["portion_option"])
+
+                )

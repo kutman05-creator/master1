@@ -19,6 +19,7 @@ async def start_handler(message: types.Message):
                     text="Оставить отзыв", callback_data="review"
                 )
             ]
+
         ]
     )
     await message.answer(f"Привет, {name}", reply_markup=kb)
