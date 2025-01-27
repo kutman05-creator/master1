@@ -11,6 +11,7 @@ from  handlers.picture import  picture_router
 from  handlers.review_dialog import review_router
 from  handlers.other_router import other_router
 from  handlers.dishes_mang import dishes_admin_router
+from  handlers.dishes import catalog_router
 
 async def on_startup(bot: Bot):
     data_base.create_table()
@@ -27,6 +28,7 @@ async def main():
     dp.include_router(picture_router)
     dp.include_router(review_router)
     dp.include_router(dishes_admin_router)
+    dp.include_router(catalog_router)
     dp.include_router(other_router)
     # dp.startup.register(on_startup)
     dp.startup.register(on_startup)
