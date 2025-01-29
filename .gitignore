@@ -55,7 +55,6 @@ coverage.xml
 cover/
 
 .idea
-.dp.sqlite3
 
 # Translations
 *.mo
@@ -66,6 +65,10 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+dp.sqlite3
+
+
+
 
 # Flask stuff:
 instance/
@@ -154,7 +157,6 @@ dmypy.json
 
 # pytype static type analyzer
 .pytype/
-dp.sqlite3
 # Cython debug symbols
 cython_debug/
 
