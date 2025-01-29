@@ -1,4 +1,5 @@
-
+# Created by https://www.toptal.com/developers/gitignore/api/python
+# Edit at https://www.toptal.com/developers/gitignore?templates=python
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -54,8 +55,6 @@ coverage.xml
 .pytest_cache/
 cover/
 
-.idea
-
 # Translations
 *.mo
 *.pot
@@ -63,12 +62,12 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
-dp.sqlite3
-
-
-
+*.sqlite3
+*.sqlite3-journal
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
 
 # Flask stuff:
 instance/
@@ -157,6 +156,7 @@ dmypy.json
 
 # pytype static type analyzer
 .pytype/
+
 # Cython debug symbols
 cython_debug/
 
@@ -177,3 +177,4 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+# End of https://www.toptal.com/developers/gitignore/api/python
