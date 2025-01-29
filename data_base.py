@@ -3,6 +3,7 @@ import sqlite3
 
 
 
+
 class Database:
     def __init__(self,path:str):
         self.path = path
@@ -11,18 +12,19 @@ class Database:
         with sqlite3.connect(self.path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-            CREATE TABLE  IF NOT EXISTS REVIEWS(
+            CREATE TABLE  IF NOT EXISTS review(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            data INTEGER,
+            date DATE,
             phone_number TEXT,
-            extra_comments TEXT
+            extra_comments TEXT,
+            rate INTEGER
             )
             """)
 
 
             cursor.execute("""
-             CREATE TABLE IF NOT EXISTS DISHES(
+             CREATE TABLE IF NOT EXISTS dishes(
              id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT,
              price INTEGER,
@@ -36,11 +38,11 @@ class Database:
             cursor = conn.cursor()
             cursor.execute(
                 """
-                INSERT INTO reviews
-                (name,data,phone_number,extra_comments)
-                VALUES (?,?,?,?)
+                INSERT INTO review
+                (name,date,phone_number,extra_comments,rate)
+                VALUES (?,?,?,?,?)
                 """,
-                (data["name"],data["date"],data["phone_number"],data["extra_comments"])
+                (data["name"],data["date"],data["phone_number"],data["extra_comments"],data["rate"])
             )
 
     def save_dish(self, data: dict):
@@ -62,3 +64,5 @@ class Database:
             result.row_factory = sqlite3.Row
             data = result.fetchall()
             return [dict(row) for row in data]
+
+

@@ -11,7 +11,7 @@ class RestaurantReview(StatesGroup):
     phone_number = State()
     rate = State()
     extra_comments = State()
-    day_data = State()
+    date = State()
 
 @review_router. callback_query(F.data == "review")
 async def  process_name(call: types.CallbackQuery,state: FSMContext) :
@@ -42,13 +42,13 @@ async def extra_process(message: types.Message, state: FSMContext):
     rate = message.text
     await  state.update_data(rate = rate)
     await message.answer("Дата вашего посещения")
-    await state.set_state(RestaurantReview.day_data)
+    await state.set_state(RestaurantReview.date)
 
 
-@review_router.message(RestaurantReview.day_data)
+@review_router.message(RestaurantReview.date)
 async def visit_data(message: types.Message, state: FSMContext):
-    data = message.text
-    await state.update_data(date = data)
+    date = message.text
+    await state.update_data(date = date)
     await message.answer("Дополнительные комментарии/жалоба")
     await state.set_state(RestaurantReview.extra_comments)
 
