@@ -55,6 +55,7 @@ coverage.xml
 cover/
 
 .idea
+.dp.sqlite3
 
 # Translations
 *.mo
