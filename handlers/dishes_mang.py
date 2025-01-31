@@ -1,9 +1,11 @@
+from pprint import pprint
+
 from aiogram import Router, F, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.state import State, StatesGroup, default_state
 
-from data_base import Database
+
 from bot_config import data_base
 
 
@@ -21,8 +23,9 @@ class Dishes(StatesGroup):
     price = State()
     category= State()
     portion_option= State()
+    cover = State()
 
-@dishes_admin_router.message(Command("dishes"))
+@dishes_admin_router.message(Command("dishes"),default_state)
 async def new_book(message: types.Message, state: FSMContext):
     await message.answer("Введите название блюдо")
     await state.set_state(Dishes.name)
@@ -57,6 +60,15 @@ async def process_author(message: types.Message, state: FSMContext):
 @dishes_admin_router.message(Dishes.portion_option)
 async def process_price(message: types.Message, state: FSMContext):
     await state.update_data(portion_option=message.text)
+    await message.answer("Загрузите обложку")
+    await state.set_state(Dishes.cover)
+
+@dishes_admin_router.message(Dishes.cover,F.photo)
+async def process_price(message: types.Message, state: FSMContext):
+    covers = message.photo
+    pprint(covers)
+    biggest_image = covers[-1]
+    await state.update_data(cover=biggest_image.file_id)
     await message.answer("Спасибо, блюдо  была сохранена")
     data = await state.get_data()
     print(data)

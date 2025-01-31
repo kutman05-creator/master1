@@ -1,9 +1,6 @@
 import sqlite3
 
 
-
-
-
 class Database:
     def __init__(self,path:str):
         self.path = path
@@ -29,7 +26,8 @@ class Database:
              name TEXT,
              price INTEGER,
              category TEXT,
-             portion_option TEXT
+             portion_option TEXT,
+             cover  TEXT
              )
              """)
 
@@ -50,10 +48,10 @@ class Database:
                 cursor = conn.cursor()
                 cursor.execute(
                 """
-                    INSERT INTO dishes (name, price, category, portion_option)
-                    VALUES (?, ?, ?, ?)
+                    INSERT INTO dishes (name, price, category, portion_option,cover)
+                    VALUES (?, ?, ?, ?, ?)
                 """,
-                    (data["name"], data["price"], data["category"], data["portion_option"])
+                    (data["name"], data["price"], data["category"], data["portion_option"],data["cover"])
 
                 )
 

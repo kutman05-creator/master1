@@ -1,4 +1,4 @@
-from  aiogram import  Router , types,F,Dispatcher
+from  aiogram import  Router , types
 from aiogram.filters import  Command
 start_router = Router()
 
@@ -24,6 +24,11 @@ async def start_handler(message: types.Message):
                     text="Все блюдо", callback_data="dishes"
                 )
 
+            ],
+            [
+                types.InlineKeyboardButton(
+                    text="Каталог с пагинацией",callback_data="dish_catalog_pagination"
+                )
             ]
 
         ]

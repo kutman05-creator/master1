@@ -1,6 +1,8 @@
 import  asyncio
+import logging
 
 
+from handlers.group import ban_router
 from bot_config import  dp, bot , data_base
 from  aiogram import Bot
 # from handlers.dishes_mang import dishes_admin_router
@@ -29,6 +31,7 @@ async def main():
     dp.include_router(review_router)
     dp.include_router(dishes_admin_router)
     dp.include_router(catalog_router)
+    dp.include_router(ban_router)
     dp.include_router(other_router)
     # dp.startup.register(on_startup)
     dp.startup.register(on_startup)
