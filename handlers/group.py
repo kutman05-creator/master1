@@ -19,8 +19,10 @@ async def check_bad_words(message: types.Message):
 
         for bad_word in BAD_WORDS:
             if bad_word in words:
+
                 await message.answer(
-                    f"{message.from_user.full_name}, вы нарушили правила и будете забанены!"
+                    f"{message.from_user.full_name}, вы нарушили правила и будете забанены!",
+                    reply_to_message_id=message.message_id
                 )
                 await message.chat.ban(message.from_user.id)
                 break
